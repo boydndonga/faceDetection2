@@ -15,6 +15,11 @@ while(True):
     	#print(x,y,w,h)
     	roi_gray = gray[y:y+h, x:x+w] #(ycord_start, ycord_end) (xcord_start, xcord_end)
     	roi_color = frame[y:y+h, x:x+w]
+        # color = (255, 0, 0) #BGR 0-255 
+    	# stroke = 2
+    	# end_cord_x = x + w
+    	# end_cord_y = y + h
+    	# cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
 
     #display the frame
     cv2.imshow('frame',frame)
