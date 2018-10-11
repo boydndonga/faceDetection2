@@ -3,9 +3,15 @@ import sys
 
 # Get user supplied values
 imagePath = sys.argv[1]
+
+#if fetching from file
 cascPath = "../cascades/data/haarcascade_frontalface_default.xml" #sys.argv[2]
-# Create the haar cascade path and link to classifie
+# if fetching via pip
+# faceCascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+
+# Create the haar cascade path and link to classifier
 faceCascade = cv2.CascadeClassifier(cascPath)
+
 
 # Read the image
 image = cv2.imread(imagePath)

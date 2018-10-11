@@ -3,9 +3,9 @@ import cv2
 
 
 # Create the haar cascade path and map to cascade classifier
-cascPath = "cascades/data/haarcascade_frontalface_default.xml" #sys.argv[2]
-face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-# face_cascade = cv2.CascadeClassifier(cascPath)
+cascPath = "../cascades/data/haarcascade_frontalface_default.xml" #sys.argv[2]
+# face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier(cascPath)
 cap = cv2.VideoCapture(0)
 
 while(True):
@@ -19,14 +19,14 @@ while(True):
     for (x, y, w, h) in faces:
     	print(x,y,w,h)
     	roi_gray = gray[y:y+h, x:x+w] #(ycord_start, ycord_end) (xcord_start, xcord_end)
-        img_item = 'myImg.png'
-        cv2.imwrite(img_item,roi_gray)
+        # img_item = 'myImg.png'
+        # cv2.imwrite(img_item,roi_gray)
     	roi_color = frame[y:y+h, x:x+w]
-        # color = (255, 0, 0) #BGR 0-255 
-    	# stroke = 2
-    	# end_cord_x = x + w
-    	# end_cord_y = y + h
-    	# cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
+        color = (255, 0, 0) #BGR 0-255 
+    	stroke = 2 #rectangle thickness
+    	end_cord_x = x + w
+    	end_cord_y = y + h
+    	cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
 
     #display the frame
     cv2.imshow('frame',frame)
