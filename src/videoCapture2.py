@@ -20,6 +20,8 @@ while True:
         flags=cv2.CASCADE_SCALE_IMAGE
     )
 
+    print("Found {0} faces!".format(len(faces)))
+
     # Draw a rectangle around the faces
     for (x, y, w, h) in faces:
         print(x,y,w,h)
