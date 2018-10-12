@@ -4,6 +4,9 @@ from PIL import Image
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
 
+face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+
+
 x_labels = []
 x_train = []
 
