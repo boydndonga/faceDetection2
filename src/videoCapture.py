@@ -14,7 +14,7 @@ recognizer.read("recognizers/face-trainer.yml")  #face trained file
 # create label dictionary from pickle labels
 labels = {"person": 1}
 with open("pickles/labels.pickle", "rb") as f:
-    first_labels = pickle.loads(f)
+    first_labels = pickle.load(f)
     labels = { v:k for k,v in first_labels.items()}  # we invert to use id_ as our call out value
 
 
