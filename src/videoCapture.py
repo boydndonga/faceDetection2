@@ -3,9 +3,15 @@ import cv2
 
 # Create the haar cascade path and map to cascade classifier
 cascPath = "../cascades/data/haarcascade_frontalface_default.xml"  # sys.argv[2]
+
 # face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 face_cascade = cv2.CascadeClassifier(cascPath)
 eyes_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
+
+recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
+recognizer.read("recognizers/face-trainer.yml")  #face trained file
+
+
 cap = cv2.VideoCapture(0)
 
 while True:
