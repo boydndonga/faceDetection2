@@ -42,9 +42,9 @@ for root, dirs, files in os.walk(image_dir):
                 y_labels.append(id_)
 
 
-with open("labels.pickle", "wb") as f:
+with open("pickles/labels.pickle", "wb") as f:
     pickle.dump(label_ids, f)
 
 
 recognizer.train(x_train, np.array(y_labels))
-recognizer.save("face-trainer.yml")
+recognizer.save("recognizers/~face-trainer.yml")
