@@ -12,9 +12,10 @@ recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
 recognizer.read("recognizers/face-trainer.yml")  #face trained file
 
 # create label dictionary from pickle labels
-label = {}
+labels = {"person": 1}
 with open("pickles/labels.pickle", "rb") as f:
-    pickle.loads(f)
+    first_labels = pickle.loads(f)
+    labels = { v:k for k,v in first_labels.items()}  # we invert to use id_ as our call out value
 
 
 cap = cv2.VideoCapture(0)
@@ -41,6 +42,7 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45 and conf <= 85:
             print(id_)
+            print(labels[id_])
 
         color = (255, 0, 0)  # BGR 0-255
         stroke = 2  # rectangle thickness
