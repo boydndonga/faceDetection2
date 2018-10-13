@@ -2,11 +2,14 @@ import os
 import cv2
 import numpy as np
 from PIL import Image
+import pickle
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
 
-face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")  #face detect module
+recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
+
 
 current_id = 0
 label_ids = {}
@@ -37,3 +40,11 @@ for root, dirs, files in os.walk(image_dir):
                 roi = image_array[y:y + h, x:x + w]
                 x_train.append(roi)
                 y_labels.append(id_)
+
+
+with open("label.pickle") as f:
+    pickle.dump(label_ids, f)
+
+
+recognizer.train(x_train, np.array(y_labels))
+recognizer.save("face-trainer.yml")
