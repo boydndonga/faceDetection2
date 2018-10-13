@@ -32,6 +32,12 @@ for root, dirs, files in os.walk(image_dir):
             id_ = label_ids[label]
             # print(label_ids)
             pil_image = Image.open(path).convert("L")  # to grayscale read https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
+
+            # resizing image to increase accuracy
+            size = (550, 550)
+            final_image = pil_image.resize(size, Image.ANTIALIAS)
+
+
             image_array = np.array(pil_image, "uint8")  # convert image to numpy array values
             # print(image_array)
             faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.3, minNeighbors=5)
