@@ -34,8 +34,8 @@ while True:
         roi_gray = gray[y:y + h, x:x + w]  # (ycord_start, ycord_end) (xcord_start, xcord_end)
         roi_color = frame[y:y + h, x:x + w]  # use frame or img
 
-        img_item = 'myImg.png'
-        img2_item = 'myImg2.png'
+        img_item = 'framedImages/myImg.png'
+        img2_item = 'framedImages/myImg2.png'
         cv2.imwrite(img_item,roi_gray)
         cv2.imwrite(img2_item,roi_color)
 
