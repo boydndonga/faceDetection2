@@ -1,5 +1,5 @@
-import numpy as np
 import cv2
+import pickle
 
 # Create the haar cascade path and map to cascade classifier
 cascPath = "../cascades/data/haarcascade_frontalface_default.xml"  # sys.argv[2]
@@ -10,6 +10,11 @@ eyes_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xm
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
 recognizer.read("recognizers/face-trainer.yml")  #face trained file
+
+# create label dictionary from pickle labels
+label = {}
+with open("pickles/labels.pickle", "rb") as f:
+    pickle.loads(f)
 
 
 cap = cv2.VideoCapture(0)
@@ -23,13 +28,20 @@ while True:
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
     # print("Found {0} faces!".format(len(faces)))
     for (x, y, w, h) in faces:
-        print(x, y, w, h)
+        # print(x, y, w, h)
         roi_gray = gray[y:y + h, x:x + w]  # (ycord_start, ycord_end) (xcord_start, xcord_end)
         roi_color = frame[y:y + h, x:x + w]  # use frame or img
+
         img_item = 'myImg.png'
         img2_item = 'myImg2.png'
         cv2.imwrite(img_item,roi_gray)
         cv2.imwrite(img2_item,roi_color)
+
+
+        id_, conf = recognizer.predict(roi_gray)
+        if conf >= 45 and conf <= 85:
+            print(id_)
+
         color = (255, 0, 0)  # BGR 0-255
         stroke = 2  # rectangle thickness
         end_cord_x = x + w
