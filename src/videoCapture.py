@@ -9,7 +9,7 @@ face_cascade = cv2.CascadeClassifier(cascPath)
 eyes_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
-recognizer.read("recognizers/face-trainer.yml")  #face trained file
+recognizer.read("./recognizers/face-trainer.yml")  #face trained file
 
 # create label dictionary from pickle labels
 labels = {"person": 1}

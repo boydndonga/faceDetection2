@@ -47,4 +47,4 @@ with open("pickles/labels.pickle", "wb") as f:
 
 
 recognizer.train(x_train, np.array(y_labels))
-recognizer.save("recognizers/~face-trainer.yml")
+recognizer.save("recognizers/face-trainer.yml")
