@@ -42,7 +42,7 @@ for root, dirs, files in os.walk(image_dir):
                 y_labels.append(id_)
 
 
-with open("label.pickle") as f:
+with open("labels.pickle", "wb") as f:
     pickle.dump(label_ids, f)
 
 
