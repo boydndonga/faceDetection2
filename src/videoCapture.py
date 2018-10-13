@@ -7,6 +7,7 @@ cascPath = "../cascades/data/haarcascade_frontalface_default.xml"  # sys.argv[2]
 # face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 face_cascade = cv2.CascadeClassifier(cascPath)
 eyes_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
+smile_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_smile.xml')
 
 recognizer = cv2.face.LBPHFaceRecognizer_create()  #face recognizer module
 recognizer.read("./recognizers/face-trainer.yml")  #face trained file
@@ -57,8 +58,12 @@ while True:
         end_cord_y = y + h
         cv2.rectangle(frame, (x, y), (end_cord_x, end_cord_y), color, stroke)
         eyes = eyes_cascade.detectMultiScale(roi_gray)
+        # smile =  smile_cascade.detectMultiScale(roi_gray)
         for (ex, ey, ew, eh) in eyes:
             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 2)
+
+        # for (sx, sy, sw, sh) in smile:  # imperfecto
+        #     cv2.rectangle(roi_color, (sx, sy), (sx + sw, sy + sh), (0, 155, 0), 2)
 
     # display the frame
     cv2.imshow('frame', frame)
