@@ -39,10 +39,17 @@ while True:
         cv2.imwrite(img2_item,roi_color)
 
 
+        # experiment with different deep learning models tensorflow/Kerra, scikit, pytorch
         id_, conf = recognizer.predict(roi_gray)
         if conf >= 45 and conf <= 85:
-            print(id_)
-            print(labels[id_])
+            # print(id_)
+            # print(labels[id_])
+            font = cv2.FONT_HERSHEY_SIMPLEX
+            font_size = 1
+            name = labels[id_]
+            color = (255, 255, 255)
+            stroke = 2
+            cv2.putText(frame, name, (x, y), font, font_size, color, stroke, cv2.LINE_AA)
 
         color = (255, 0, 0)  # BGR 0-255
         stroke = 2  # rectangle thickness
