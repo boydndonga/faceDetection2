@@ -1,10 +1,12 @@
 import os
+import cv2
+import numpy as np
 from PIL import Image
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "images")
 
-face_cascade =cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 
 current_id = 0
 label_ids = {}
@@ -25,10 +27,11 @@ for root, dirs, files in os.walk(image_dir):
                 label_ids[label] = current_id
                 current_id += 1
             id_ = label_ids[label]
-
+            # print(label_ids)
             pil_image = Image.open(path).convert("L")  # to grayscale read https://pillow.readthedocs.io/en/3.1.x/reference/Image.html
             image_array = np.array(pil_image, "uint8")  # convert image to numpy array values
-            faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
+            # print(image_array)
+            faces = face_cascade.detectMultiScale(image_array, scaleFactor=1.3, minNeighbors=5)
 
             for (x, y, w, h) in faces:
                 roi = image_array[y:y + h, x:x + w]
