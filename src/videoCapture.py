@@ -17,7 +17,7 @@ while True:
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=5)
     # print("Found {0} faces!".format(len(faces)))
     for (x, y, w, h) in faces:
-        print(x, y, w, h)
+        # print(x, y, w, h)
         roi_gray = gray[y:y + h, x:x + w]  # (ycord_start, ycord_end) (xcord_start, xcord_end)
         roi_color = frame[y:y + h, x:x + w]  # use frame or img
         img_item = 'myImg.png'
